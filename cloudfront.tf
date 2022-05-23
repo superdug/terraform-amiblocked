@@ -16,7 +16,7 @@ resource "aws_cloudfront_distribution" "www_s3_distribution" {
   is_ipv6_enabled = true
   default_root_object = "index.html"
 
-  aliases = ["www.${var.domain_name}"]
+  aliases = ["${var.domain_name}","www.${var.domain_name}"]
 
   custom_error_response {
     error_caching_min_ttl = 0
@@ -59,7 +59,7 @@ resource "aws_cloudfront_distribution" "www_s3_distribution" {
 
   tags = var.common_tags
 }
-
+/*
 # Cloudfront S3 for redirect to www.
 resource "aws_cloudfront_distribution" "root_s3_distribution" {
   origin {
@@ -113,3 +113,7 @@ resource "aws_cloudfront_distribution" "root_s3_distribution" {
 
   tags = var.common_tags
 }
+
+
+
+*/
