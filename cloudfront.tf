@@ -49,7 +49,7 @@ resource "aws_cloudfront_distribution" "www_s3_distribution" {
 # Cloudfront S3 for redirect to www.
 resource "aws_cloudfront_distribution" "root_s3_distribution" {
   origin {
-    domain_name = "root_${var.bucket_name}.s3.amazonaws.com"
+    domain_name = "root-${var.bucket_name}.s3.amazonaws.com"
     origin_id = "S3-www.${var.bucket_name}"
   }
   enabled = true
