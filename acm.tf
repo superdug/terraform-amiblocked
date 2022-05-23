@@ -29,8 +29,3 @@ resource "aws_acm_certificate_validation" "default" {
     "${aws_route53_record.default.fqdn}",
   ]
 }
-
-resource "aws_acm_certificate_validation" "cert" {
-  certificate_arn         = aws_acm_certificate.default.arn
-  validation_record_fqdns = [ aws_route53_record.default.fqdn ]
-}
