@@ -9,7 +9,7 @@ resource "aws_s3_bucket" "www_bucket" {
 resource "aws_s3_bucket_acl" "www_bucket_acl" {
   bucket = aws_s3_bucket.www_bucket.id
   acl    = "public-read"
-}d
+}
 
 resource "aws_s3_bucket_cors_configuration" "www_bucket_cors" {
   bucket = aws_s3_bucket.www_bucket.id
