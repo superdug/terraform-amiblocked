@@ -14,8 +14,10 @@ resource "aws_acm_certificate" "default" {
 }
 
 resource "aws_route53_record" "validation" {
-  name    = "${aws_acm_certificate.default.domain_validation_options.resource_record_name}"
-  type    = "${aws_acm_certificate.default.domain_validation_options.resource_record_type}"
+  allow_overwrite = true
+  name            = tolist(aws_acm_certificate.myapp.domain_validation_options)[0].resource_record_name
+  records         = [ tolist(aws_acm_certificate.myapp.domain_validation_options)[0].resource_record_value ]
+  type            = tolist(aws_acm_certificate.myapp.domain_validation_options)[0].resource_record_type
   zone_id = var.zone_id
   records = ["${aws_acm_certificate.default.domain_validation_options.resource_record_value}"]
   ttl     = "60"
