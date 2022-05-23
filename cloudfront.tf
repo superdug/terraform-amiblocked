@@ -3,13 +3,6 @@ resource "aws_cloudfront_distribution" "www_s3_distribution" {
   origin {
     domain_name = aws_s3_bucket.www_bucket.website_endpoint
     origin_id = "S3-www.${var.bucket_name}"
-
-    custom_origin_config {
-      http_port = 80
-      https_port = 443
-      origin_protocol_policy = "http-only"
-      origin_ssl_protocols = ["TLSv1", "TLSv1.1", "TLSv1.2"]
-    }
   }
 
   enabled = true
@@ -22,7 +15,7 @@ resource "aws_cloudfront_distribution" "www_s3_distribution" {
     error_caching_min_ttl = 0
     error_code = 404
     response_code = 200
-    response_page_path = "/404.html"
+    response_page_path = "error.html"
   }
 
   default_cache_behavior {
