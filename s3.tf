@@ -39,7 +39,10 @@ resource "aws_s3_bucket_website_configuration" "www_bucket_website" {
 resource "aws_s3_bucket" "root_bucket" {
   bucket = "root_${var.bucket_name}"
   //acl = "public-read"
-  policy = templatefile("templates/s3-policy.json", { bucket = "root_${var.bucket_name}" })
+  policy = templatefile("templates/s3-policy.json", { 
+    bucket = "root_${var.bucket_name}"
+    }
+  )
   tags = var.common_tags
 }
 
