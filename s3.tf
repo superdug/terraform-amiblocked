@@ -12,7 +12,7 @@ resource "aws_s3_bucket_acl" "www_bucket_acl" {
 }
 
 resource "aws_s3_bucket_cors_configuration" "www_bucket_cors" {
-  bucket = aws_s3_bucket.www_bucket.bucket
+  bucket = aws_s3_bucket.www_bucket.id
 
   cors_rule {
     allowed_headers = ["Authorization", "Content-Length"]
@@ -23,7 +23,7 @@ resource "aws_s3_bucket_cors_configuration" "www_bucket_cors" {
 }
 
 resource "aws_s3_bucket_website_configuration" "www_bucket_website" {
-  bucket = aws_s3_bucket.www_bucket.bucket
+  bucket = aws_s3_bucket.www_bucket.id
 
   index_document {
     suffix = "index.html"
