@@ -1,7 +1,7 @@
 # Cloudfront distribution for main s3 site.
 resource "aws_cloudfront_distribution" "www_s3_distribution" {
   origin {
-    domain_name = aws_s3_bucket.www_bucket.domain_name
+    domain_name = aws_s3_bucket.www_bucket.bucket
     origin_id = "S3-www.${var.bucket_name}"
   }
 
