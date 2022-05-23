@@ -13,7 +13,7 @@ resource "aws_acm_certificate" "default" {
   }
 }
 
-resource "aws_route53_record" "validation" {
+resource "aws_route53_record" "default" {
   allow_overwrite = true
   name            = tolist(aws_acm_certificate.default.domain_validation_options)[0].resource_record_name
   records         = [ tolist(aws_acm_certificate.default.domain_validation_options)[0].resource_record_value ]
