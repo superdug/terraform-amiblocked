@@ -1,7 +1,7 @@
 # Cloudfront distribution for main s3 site.
 resource "aws_cloudfront_distribution" "www_s3_distribution" {
   origin {
-    domain_name = "${var.bucket_name}.s3.amazonaws.com"
+    domain_name = "root_${var.bucket_name}.s3.amazonaws.com"
     origin_id = "S3-www.${var.bucket_name}"
   }
 
@@ -45,20 +45,13 @@ resource "aws_cloudfront_distribution" "www_s3_distribution" {
 
   tags = var.common_tags
 }
-/*
+
 # Cloudfront S3 for redirect to www.
 resource "aws_cloudfront_distribution" "root_s3_distribution" {
   origin {
-    domain_name = aws_s3_bucket.root_bucket.website_endpoint
-    origin_id = "S3-.${var.bucket_name}"
-    custom_origin_config {
-      http_port = 80
-      https_port = 443
-      origin_protocol_policy = "http-only"
-      origin_ssl_protocols = ["TLSv1", "TLSv1.1", "TLSv1.2"]
-    }
+    domain_name = "${var.bucket_name}.s3.amazonaws.com"
+    origin_id = "S3-www.${var.bucket_name}"
   }
-
   enabled = true
   is_ipv6_enabled = true
 

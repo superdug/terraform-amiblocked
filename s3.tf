@@ -9,7 +9,7 @@ resource "aws_s3_bucket" "www_bucket" {
 resource "aws_s3_bucket_acl" "www_bucket_acl" {
   bucket = aws_s3_bucket.www_bucket.id
   acl    = "public-read"
-}
+}d
 
 resource "aws_s3_bucket_cors_configuration" "www_bucket_cors" {
   bucket = aws_s3_bucket.www_bucket.id
@@ -34,17 +34,22 @@ resource "aws_s3_bucket_website_configuration" "www_bucket_website" {
   }
 }
 
-/*
-# S3 bucket for redirecting non-www to www.
+
+# S3 bucket for ROOT website.
 resource "aws_s3_bucket" "root_bucket" {
-  bucket = var.bucket_name
-  acl = "public-read"
-  policy = templatefile("templates/s3-policy.json", { bucket = var.bucket_name })
-
-  website {
-    redirect_all_requests_to = "https://www.${var.domain_name}"
-  }
-
+  bucket = "root_${var.bucket_name}"
+  //acl = "public-read"
+  policy = templatefile("templates/s3-policy.json", { bucket = "root_${var.bucket_name}" })
   tags = var.common_tags
 }
-*/
+
+resource "aws_s3_bucket_acl" "root_bucket_acl" {
+  bucket = aws_s3_bucket.root_bucket.id
+  acl    = "public-read"
+}
+
+resource "aws_s3_bucket_website_configuration" "root_bucket_website" {
+  bucket = aws_s3_bucket.root_bucket.id
+
+  redirect_all_requests_to = "https://www.${var.domain_name}"
+}
