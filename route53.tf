@@ -1,8 +1,3 @@
-resource "aws_route53_zone" "main" {
-  name = var.domain_name
-  tags = var.common_tags
-}
-
 resource "aws_route53_record" "root-a" {
   zone_id = var.zone_id
   name = var.domain_name
