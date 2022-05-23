@@ -15,7 +15,7 @@ resource "aws_acm_certificate" "default" {
 
 data "aws_route53_zone" "selected" {
   name         = var.domain_name
-  private_zone = false
+  //private_zone = false
 }
 
 
