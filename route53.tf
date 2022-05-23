@@ -1,3 +1,4 @@
+/*
 resource "aws_route53_record" "root-a" {
   zone_id = var.zone_id
   name = var.domain_name
@@ -9,7 +10,7 @@ resource "aws_route53_record" "root-a" {
     evaluate_target_health = false
   }
 }
-
+*/
 resource "aws_route53_record" "www-a" {
   zone_id = var.zone_id
   name = "www.${var.domain_name}"
