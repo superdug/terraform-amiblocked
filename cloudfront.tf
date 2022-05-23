@@ -42,13 +42,6 @@ resource "aws_cloudfront_distribution" "www_s3_distribution" {
     ssl_support_method = "sni-only"
     minimum_protocol_version = "TLSv1.1_2016"
   }
-
-  tags = var.common_tags
-}
-/*
-# Cloudfront S3 for redirect to www.
-resource "aws_cloudfront_distribution" "root_s3_distribution" {
-  origin {
     domain_name = aws_s3_bucket.root_bucket.website_endpoint
     origin_id = "S3-.${var.bucket_name}"
     custom_origin_config {
