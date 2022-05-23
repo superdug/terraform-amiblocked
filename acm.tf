@@ -1,5 +1,5 @@
 # SSL Certificate
-resource "aws_acm_certificate" "ssl_certificate" {
+resource "aws_acm_certificate" "default" {
   provider = aws.acm_provider
   domain_name = var.domain_name
   subject_alternative_names = ["*.${var.domain_name}"]
@@ -13,9 +13,17 @@ resource "aws_acm_certificate" "ssl_certificate" {
   }
 }
 
-# Uncomment the validation_record_fqdns line if you do DNS validation instead of Email.
-resource "aws_acm_certificate_validation" "cert_validation" {
-  provider = aws.acm_provider
-  certificate_arn = aws_acm_certificate.ssl_certificate.arn
-  validation_record_fqdns = [for record in aws_route53_record.cert_validation : record.fqdn]
+resource "aws_route53_record" "validation" {
+  name    = "${aws_acm_certificate.default.domain_validation_options.0.resource_record_name}"
+  type    = "${aws_acm_certificate.default.domain_validation_options.0.resource_record_type}"
+  zone_id = var.zone_id
+  records = ["${aws_acm_certificate.default.domain_validation_options.0.resource_record_value}"]
+  ttl     = "60"
+}
+
+resource "aws_acm_certificate_validation" "default" {
+  certificate_arn = "${aws_acm_certificate.default.arn}"
+  validation_record_fqdns = [
+    "${aws_route53_record.validation.fqdn}",
+  ]
 }
