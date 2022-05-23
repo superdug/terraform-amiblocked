@@ -51,5 +51,8 @@ resource "aws_s3_bucket_acl" "root_bucket_acl" {
 resource "aws_s3_bucket_website_configuration" "root_bucket_website" {
   bucket = aws_s3_bucket.root_bucket.id
 
-  redirect_all_requests_to = "https://www.${var.domain_name}"
+  redirect_all_requests_to {
+    host_name = "www.${var.domain_name}"
+    protocol = "https"
+  }
 }
