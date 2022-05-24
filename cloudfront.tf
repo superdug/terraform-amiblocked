@@ -52,10 +52,11 @@ resource "aws_cloudfront_distribution" "root_s3_distribution" {
     domain_name = "root-${var.bucket_name}.s3.amazonaws.com"
     origin_id = "S3-.${var.bucket_name}"
   }
+
   enabled = true
   is_ipv6_enabled = true
 
-  aliases = [var.domain_name]
+  aliases = ["${var.domain_name}"]
 
   default_cache_behavior {
     allowed_methods = ["GET", "HEAD"]
