@@ -43,7 +43,7 @@ resource "aws_s3_bucket" "root_bucket" {
   bucket = "root-${var.bucket_name}"
 
   policy = templatefile("templates/s3-policy.json", { 
-    bucket = "root-{var.bucket_name}"
+    bucket = "root-${var.bucket_name}"
     }
   )
   tags = var.common_tags
