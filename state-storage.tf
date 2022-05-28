@@ -1,15 +1,16 @@
 resource "aws_s3_bucket" "terraform-state-storage-s3" {
   bucket = "amiblocked.io.tfstate"
 
-  versioning {
-    # enable with caution, makes deleting S3 buckets tricky
-    enabled = false
-  }
-
   lifecycle {
     prevent_destroy = true
   }
+}
 
+resource "aws_s3_bucket_versioning" "terraform-state-storage-s3" {
+  bucket = aws_s3_bucket.terraform-state-storage-s3.id
+  versioning_configuration {
+    status = "Disabled"
+  }
 }
 
 # create a DynamoDB table for locking the state file
