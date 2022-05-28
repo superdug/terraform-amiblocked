@@ -9,6 +9,14 @@ terraform {
     dynamodb_table = "terraform-lock"
   }
 
+  backend "s3" {
+    bucket         = "amiblocked.io.tfstate"
+    key            = "ecs-platform"
+    region         = "us-east-1"
+    encrypt        = true
+    dynamodb_table = "terraform-lock"
+  }
+
   required_providers {
     aws = {
       source = "hashicorp/aws"
