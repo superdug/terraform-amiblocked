@@ -1,12 +1,12 @@
 terraform {
   //required_version = "~> 0.14"
-
+  
   backend "s3" {
     bucket         = "amiblocked.io.tfstate"
     key            = "ecs-platform"
     region         = "us-east-1"
     encrypt        = true
-    dynamodb_table = "terraform-lock"
+    dynamodb_table = "example-iac-terraform-state-lock-dynamo"
   }
 
   required_providers {
