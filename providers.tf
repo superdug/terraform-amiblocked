@@ -1,7 +1,5 @@
 terraform {
-  //required_version = "~> 0.14"
-  
-  backend "s3" {
+   backend "s3" {
     bucket         = "amiblocked.io.tfstate"
     key            = "ecs-platform"
     region         = "us-east-1"
