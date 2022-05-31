@@ -1,3 +1,11 @@
+
+module cloudfront_lambda {
+  source = "daringway/cloudfront-viewer-request-lambda/aws"
+  tags   = {}
+  apex_domain_redirect = true
+  index_rewrite        = true
+}
+
 # Cloudfront distribution for main s3 site.
 resource "aws_cloudfront_distribution" "www_s3_distribution" {
   origin {
@@ -24,6 +32,12 @@ resource "aws_cloudfront_distribution" "www_s3_distribution" {
       }
     }
 
+    lambda_function_association {
+      event_type   = "viewer-request"
+      lambda_arn   = module.cloudfront_lambda.qualified_arn
+      include_body = false
+    }
+
     viewer_protocol_policy = "redirect-to-https"
     min_ttl = 31536000
     default_ttl = 31536000
@@ -42,6 +56,8 @@ resource "aws_cloudfront_distribution" "www_s3_distribution" {
     ssl_support_method = "sni-only"
     minimum_protocol_version = "TLSv1.1_2016"
   }
+
+
 
   tags = var.common_tags
 }
