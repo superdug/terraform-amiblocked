@@ -43,13 +43,13 @@ resource "aws_cloudfront_distribution" "www_s3_distribution" {
     minimum_protocol_version = "TLSv1.1_2016"
   }
 
-  tags = var.common_tags
-
   lambda_function_association {
     event_type   = "viewer-request"
     lambda_arn   = module.cloudfront_lambda.qualified_arn
     include_body = false
   }
+
+  tags = var.common_tags
 }
 
 # Cloudfront S3 for redirect to www.
