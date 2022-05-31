@@ -23,10 +23,3 @@ provider "aws" {
   alias = "acm_provider"
   region = "us-east-1"
 }
-
-module cloudfront_lambda {
-  source = "daringway/cloudfront-viewer-request-lambda/aws"
-  tags   = {}
-  apex_domain_redirect = true
-  index_rewrite        = true
-}
