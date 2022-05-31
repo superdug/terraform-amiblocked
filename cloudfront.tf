@@ -44,6 +44,12 @@ resource "aws_cloudfront_distribution" "www_s3_distribution" {
   }
 
   tags = var.common_tags
+
+  lambda_function_association {
+    event_type   = "viewer-request"
+    lambda_arn   = module.cloudfront_lambda.qualified_arn
+    include_body = false
+  }
 }
 
 # Cloudfront S3 for redirect to www.
