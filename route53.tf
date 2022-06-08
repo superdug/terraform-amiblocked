@@ -25,7 +25,7 @@ resource "aws_route53_record" "www-a" {
 
 resource "aws_route53_record" "CAA-1" {
   zone_id = var.zone_id
-  name    = ""
+  name    = var.domain_name
   type    = "CAA"
   ttl     = "5"
 
@@ -34,7 +34,7 @@ resource "aws_route53_record" "CAA-1" {
 
 resource "aws_route53_record" "CAA-2" {
   zone_id = var.zone_id
-  name    = ""
+  name    = var.domain_name
   type    = "CAA"
   ttl     = "5"
 
@@ -43,7 +43,7 @@ resource "aws_route53_record" "CAA-2" {
 
 resource "aws_route53_record" "CAA-3" {
   zone_id = var.zone_id
-  name    = ""
+  name    = var.domain_name
   type    = "CAA"
   ttl     = "5"
 
@@ -52,7 +52,7 @@ resource "aws_route53_record" "CAA-3" {
 
 resource "aws_route53_record" "CAA-4" {
   zone_id = var.zone_id
-  name    = ""
+  name    = var.domain_name
   type    = "CAA"
   ttl     = "5"
 
