@@ -3,7 +3,6 @@ resource "aws_acm_certificate" "default" {
   provider = aws.acm_provider
   domain_name = var.domain_name
   subject_alternative_names = ["*.${var.domain_name}"]
-  #validation_method = "EMAIL"
   validation_method = "DNS"
 
   tags = var.common_tags
