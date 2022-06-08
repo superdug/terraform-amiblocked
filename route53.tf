@@ -23,38 +23,15 @@ resource "aws_route53_record" "www-a" {
   }
 }
 
-resource "aws_route53_record" "CAA-1" {
-  zone_id = var.zone_id
-  name    = var.domain_name
-  type    = "CAA"
-  ttl     = "5"
+resource "aws_route53_record" "caa" {
+  allow_overwrite = true
+  zone_id         = var.zone_id
+  name            = var.domain_name
+  type            = "CAA"
+  ttl             = 86400
+  records         = ["amazontrust.com","awstrust.com","amazon.com","amazonaws.com"]
 
-  records        = ["amazon.com"]
-}
-
-resource "aws_route53_record" "CAA-2" {
-  zone_id = var.zone_id
-  name    = var.domain_name
-  type    = "CAA"
-  ttl     = "5"
-
-  records        = ["amazontrust.com"]
-}
-
-resource "aws_route53_record" "CAA-3" {
-  zone_id = var.zone_id
-  name    = var.domain_name
-  type    = "CAA"
-  ttl     = "5"
-
-  records        = ["awstust.com"]
-}
-
-resource "aws_route53_record" "CAA-4" {
-  zone_id = var.zone_id
-  name    = var.domain_name
-  type    = "CAA"
-  ttl     = "5"
-
-  records        = ["amazonaws.com"]
+  lifecycle {
+    create_before_destroy = false
+  }
 }
