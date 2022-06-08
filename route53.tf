@@ -29,6 +29,7 @@ resource "aws_route53_record" "caa" {
   name            = var.domain_name
   type            = "CAA"
   ttl             = 86400
+
   records         = ["amazontrust.com","awstrust.com","amazon.com","amazonaws.com"]
 
   lifecycle {
