@@ -22,3 +22,12 @@ resource "aws_route53_record" "www-a" {
     evaluate_target_health = false
   }
 }
+
+resource "aws_route53_record" "CAA" {
+  zone_id = var.zone_id
+  name    = ""
+  type    = "CAA"
+  ttl     = "5"
+
+  records        = ["amazon.com","amazontrust.com","awstust.com","amazonaws.com"]
+}
