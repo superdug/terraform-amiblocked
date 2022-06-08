@@ -30,7 +30,7 @@ resource "aws_route53_record" "caa" {
   type            = "CAA"
   ttl             = 86400
 
-  records         = ["amazontrust.com","awstrust.com","amazon.com","amazonaws.com"]
+  records         = ["0 issue \"amazontrust.com\"","0 issue \"awstrust.com\"","0 issue \"amazon.com\"","0 issue \"amazonaws.com\""]
 
   lifecycle {
     create_before_destroy = false
